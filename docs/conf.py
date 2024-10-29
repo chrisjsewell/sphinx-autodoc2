@@ -1,4 +1,5 @@
 """The configuration for this packages documentation."""
+
 from datetime import date
 
 from autodoc2 import __version__
@@ -95,11 +96,10 @@ nitpick_ignore_regex = [
 
 import typing as t  # noqa: E402
 
+from autodoc2.config import CONFIG_PREFIX, Config, PackageConfig  # noqa: E402
 from docutils import nodes  # noqa: E402
 from sphinx.application import Sphinx  # noqa: E402
 from sphinx.util.docutils import SphinxDirective  # noqa: E402
-
-from autodoc2.config import CONFIG_PREFIX, Config, PackageConfig  # noqa: E402
 
 
 def setup(app: Sphinx) -> None:

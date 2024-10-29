@@ -1,4 +1,5 @@
 """Directive for rendering docstrings."""
+
 from __future__ import annotations
 
 from contextlib import contextmanager
@@ -34,7 +35,7 @@ def parser_options(argument: str) -> Parser | None:
     try:
         return get_parser_class(argument)
     except ImportError as err:
-        raise ValueError(str(err))
+        raise ValueError(str(err)) from err
 
 
 def summary_option(argument: str) -> int | None:
@@ -42,8 +43,8 @@ def summary_option(argument: str) -> int | None:
     if argument and argument.strip():
         try:
             value = int(argument)
-        except ValueError:
-            raise ValueError("non-integer value; must be an integer")
+        except ValueError as err:
+            raise ValueError("non-integer value; must be an integer") from err
         if value < 0:
             raise ValueError("negative value; must be positive or zero")
         return value
@@ -58,7 +59,7 @@ class DocstringRenderer(SphinxDirective):
     required_arguments = 1  # the full name
     optional_arguments = 0
     final_argument_whitespace = True
-    option_spec = {
+    option_spec: t.ClassVar[dict[str, t.Any]] = {
         "parser": parser_options,
         "allowtitles": directives.flag,  # used for module docstrings
         "summary": summary_option,  # number of children to return

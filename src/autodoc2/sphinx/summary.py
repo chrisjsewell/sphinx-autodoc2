@@ -1,5 +1,8 @@
 """Directive to generate a summary of listed objects."""
+
 from __future__ import annotations
+
+from typing import Any, ClassVar
 
 from docutils import nodes
 from docutils.parsers.rst import directives
@@ -22,7 +25,7 @@ class AutodocSummary(SphinxDirective):
     required_arguments = 0
     optional_arguments = 0
     final_argument_whitespace = False
-    option_spec = {
+    option_spec: ClassVar[dict[str, Any]] = {
         "renderer": directives.unchanged_required,
     }
 

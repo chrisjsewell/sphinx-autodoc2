@@ -1,4 +1,5 @@
 """autodoc directive for sphinx."""
+
 from __future__ import annotations
 
 from contextlib import contextmanager
@@ -33,7 +34,7 @@ class AutodocObject(SphinxDirective):
     has_content = True
 
     # TODO autogenerate this from the config
-    option_spec = {
+    option_spec: t.ClassVar[dict[str, t.Any]] = {
         "literal": directives.flag,  # return the literal render string
         "literal-lexer": directives.unchanged,  # the lexer to use for literal
     }
